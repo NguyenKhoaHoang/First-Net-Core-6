@@ -6,12 +6,15 @@
 
 <div class="text-center">
     <h1 class="display-4">Damn Bruh Product</h1>
+    <a class="btn btn-info float-end" style="margin-right: 134px;" href="/Product/Create">Create</a>
     <table class="table">
         <thead>
             <th>ID</th>
             <th>Name</th>
             <th>Price</th>
             <th>Quantity</th>
+            <th>Slug</th>
+            <th>Category</th>
             <th>Option</th>
         </thead>
         <tbody>
@@ -22,8 +25,11 @@
                     <td>@product.Name</td>
                     <td>@product.Price</td>
                     <td>@product.Quantity</td>
+                    <td>@product.Slug</td>
+                    <td>@product.Category.Name</td>
                     <td>
-                        <a class="btn btn-primary" href="">Edit</a> <a class="btn btn-danger" href="">Delete</a>
+                        <a class="btn btn-primary" href="/Product/Update/@product.Id">Edit</a> 
+                        <a class="btn btn-danger" href="">Delete</a>
                     </td>
                 </tr>
             }

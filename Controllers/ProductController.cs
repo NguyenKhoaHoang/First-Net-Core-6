@@ -36,5 +36,27 @@ namespace ProductManager.Controllers
             var products = _productService.GetProduct();
             return View(products);
         }
+        
+        public IActionResult Create()
+        {
+            var categories = _productService.GetCategories();
+            return View(categories);
+        }
+
+        public IActionResult Save(Product product)
+        {
+            _productService.CreateProduct(product);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Update(int id)
+        {
+            var product = _productService.GetProductById(id);
+            if(product==null) return RedirectToAction("Create");
+
+            var categories = _productService.GetCategories();
+            ViewBag.Categories = categories;
+            return View(product);
+        }
     }
 }
