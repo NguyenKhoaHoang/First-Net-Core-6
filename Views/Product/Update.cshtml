@@ -1,12 +1,16 @@
-@model Product;
+@model List<Category>;
 @{
     ViewData["Title"] = "Product Update Page";
-    var categories = ViewBag.Categories;
-    var product = Model;
+    var categories = Model;
+    var product = ViewBag.Product;
 }
 
 <div class="w-50">
     <form action="/Product/Save" method="post">
+        <div class="form-group">
+            <label>Id</label>
+            <input type="text" class="form-control" name="Id" value="@product.Id" readonly>
+        </div>
         <div class="form-group">
             <label>Name</label>
             <input type="text" class="form-control" name="Name" placeholder="Enter name" value="@product.Name">
@@ -34,8 +38,6 @@
                     }else{
                         <option value="@category.Id">@category.Name</option>
                     }
-
-                        
                 }
             </select>
         </div>

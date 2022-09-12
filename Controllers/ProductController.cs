@@ -45,7 +45,12 @@ namespace ProductManager.Controllers
 
         public IActionResult Save(Product product)
         {
-            _productService.CreateProduct(product);
+            if (product.Id == 0)
+            {
+                _productService.CreateProduct(product);
+            } else {
+                _productService.UpdateProduct(product);
+            }
             return RedirectToAction("Index");
         }
 
@@ -53,10 +58,15 @@ namespace ProductManager.Controllers
         {
             var product = _productService.GetProductById(id);
             if(product==null) return RedirectToAction("Create");
+            var categories = _productService.GetCategories();   
+            ViewBag.Product = product;
+            return View(categories);
+        }
 
-            var categories = _productService.GetCategories();
-            ViewBag.Categories = categories;
-            return View(product);
+        public IActionResult Delete(int id)
+        {
+            _productService.DeleteProduct(id);
+            return RedirectToAction("Index");
         }
     }
 }
